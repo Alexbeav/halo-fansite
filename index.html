@@ -1,53 +1,230 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A fan site dedicated to the Halo video game series featuring characters, equipment, and locations.">
-    <title>Halo - Main</title>
+    <meta name="description" content="A fan site dedicated to the Halo video game series featuring characters, equipment, and locations from the legendary sci-fi franchise.">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Halo Fansite - Welcome to the UNSC">
+    <meta property="og:description" content="Explore the universe of Halo - characters, weapons, and iconic locations.">
+    <meta property="og:image" content="assets/images/reach.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/cortana.png">
+
+    <title>Halo Fansite - Home</title>
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="page-home">
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <header>
-        <h1>Welcome to a Halo fansite!</h1>
-        <nav aria-label="Main navigation">
-            <ul>
-                <li><a href="Characters.html">Characters</a></li>
-                <li><a href="Equipment.html">Equipment</a></li>
-                <li><a href="Locations.html">Locations</a></li>
-                <li class="nav-right"><a href="index.html" aria-current="page">Main</a></li>
-            </ul>
-        </nav>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">HALO</span>
+                <span class="logo-sub">FANSITE</span>
+            </a>
+
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+                <span class="hamburger"></span>
+            </button>
+
+            <nav id="nav-menu" class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html" aria-current="page">Home</a></li>
+                    <li><a href="Characters.html">Characters</a></li>
+                    <li><a href="Equipment.html">Equipment</a></li>
+                    <li><a href="Locations.html">Locations</a></li>
+                </ul>
+            </nav>
+
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="true">
+                <span class="icon">☀️</span>
+            </button>
+        </div>
     </header>
 
-    <main id="main-content">
-        <section class="content-wrapper">
-            <article class="main-content">
-                <h2>Introductions</h2>
-                <p>Welcome to the UNSC!</p>
-                <h3>List of Halo Games</h3>
-                <ol class="game-list">
-                    <li>Halo: Combat Evolved (2001)</li>
-                    <li>Halo 2 (2004)</li>
-                    <li>Halo 3 (2007)</li>
-                    <li>Halo: Reach (2010)</li>
-                    <li>Halo 4 (2012)</li>
-                </ol>
-            </article>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="hero-title-top">Welcome to the</span>
+                <span class="hero-title-main">UNSC</span>
+            </h1>
+            <p class="hero-subtitle">Your gateway to the Halo universe</p>
+            <div class="hero-cta">
+                <a href="Characters.html" class="btn btn-primary">Meet the Spartans</a>
+                <a href="Equipment.html" class="btn btn-secondary">View Arsenal</a>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
 
-            <aside class="sidepanel">
-                <h2>Cortana Says</h2>
-                <p>This is the main landing page!</p>
-                <p>You can use the buttons at the top to navigate to other pages.</p>
-                <img src="cortana.png" alt="Cortana, the AI companion" loading="lazy">
-            </aside>
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">Main Games</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2001</span>
+                        <span class="stat-label">Year Started</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">117</span>
+                        <span class="stat-label">Master Chief</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Adventures</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Games Timeline -->
+        <section class="games-section">
+            <div class="container">
+                <h2 class="section-title">The Halo Saga</h2>
+                <p class="section-subtitle">A legendary franchise spanning over two decades</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2001</div>
+                        <div class="timeline-content">
+                            <h3>Halo: Combat Evolved</h3>
+                            <p>The game that started it all. Master Chief awakens aboard the Pillar of Autumn.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2004</div>
+                        <div class="timeline-content">
+                            <h3>Halo 2</h3>
+                            <p>The Covenant invades Earth. The battle continues on Delta Halo.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2007</div>
+                        <div class="timeline-content">
+                            <h3>Halo 3</h3>
+                            <p>Finish the fight. The epic conclusion to the original trilogy.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2010</div>
+                        <div class="timeline-content">
+                            <h3>Halo: Reach</h3>
+                            <p>Noble Team's sacrifice. The fall of Reach and the beginning of the war.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2012</div>
+                        <div class="timeline-content">
+                            <h3>Halo 4</h3>
+                            <p>A new enemy emerges. Master Chief faces the Didact and the Prometheans.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Cards -->
+        <section class="featured-section">
+            <div class="container">
+                <h2 class="section-title">Explore the Universe</h2>
+                <div class="featured-grid">
+                    <a href="Characters.html" class="featured-card">
+                        <div class="card-image">
+                            <img src="assets/images/john117.png" alt="Master Chief" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3>Characters</h3>
+                            <p>Meet the heroes and legends of the Halo universe</p>
+                        </div>
+                        <span class="card-arrow">→</span>
+                    </a>
+
+                    <a href="Equipment.html" class="featured-card">
+                        <div class="card-image">
+                            <img src="assets/images/AR.png" alt="Assault Rifle" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3>Equipment</h3>
+                            <p>Discover the weapons and gear of the UNSC</p>
+                        </div>
+                        <span class="card-arrow">→</span>
+                    </a>
+
+                    <a href="Locations.html" class="featured-card">
+                        <div class="card-image">
+                            <img src="assets/images/reach.jpg" alt="Reach" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3>Locations</h3>
+                            <p>Explore the worlds and installations</p>
+                        </div>
+                        <span class="card-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cortana Section -->
+        <section class="cortana-section">
+            <div class="container">
+                <div class="cortana-card">
+                    <div class="cortana-image">
+                        <img src="assets/images/cortana.png" alt="Cortana AI" loading="lazy">
+                    </div>
+                    <div class="cortana-content">
+                        <h2>Cortana Says</h2>
+                        <blockquote>
+                            "Welcome, Spartan. This fansite is your briefing on everything Halo. Navigate using the menu above to learn about the brave soldiers, powerful weapons, and legendary locations that define this universe."
+                        </blockquote>
+                        <p class="cortana-signature">— Cortana, UNSC AI Serial Number: CTN 0452-9</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>Halo is a registered trademark of Microsoft Corporation.</p>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">HALO</span>
+                    <span class="logo-sub">FANSITE</span>
+                </div>
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <a href="Characters.html">Characters</a>
+                    <a href="Equipment.html">Equipment</a>
+                    <a href="Locations.html">Locations</a>
+                </nav>
+                <p class="footer-legal">
+                    Halo is a registered trademark of Microsoft Corporation.
+                    <br>This is a fan-made site for educational purposes.
+                </p>
+            </div>
+        </div>
     </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

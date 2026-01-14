@@ -1,81 +1,208 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Meet the characters of the Halo universe including Master Chief, Cortana, and Sergeant Johnson.">
-    <title>Halo - Characters</title>
+    <meta name="description" content="Meet the legendary characters of the Halo universe - Master Chief, Cortana, Sergeant Johnson, and more heroes of the UNSC.">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Halo Characters - Heroes of the UNSC">
+    <meta property="og:description" content="Meet Master Chief, Cortana, and the heroes who defend humanity.">
+    <meta property="og:image" content="assets/images/john117.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/cortana.png">
+
+    <title>Halo Fansite - Characters</title>
+
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="page-characters">
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <header>
-        <h1>Welcome to a Halo fansite!</h1>
-        <nav aria-label="Main navigation">
-            <ul>
-                <li><a href="Characters.html" aria-current="page">Characters</a></li>
-                <li><a href="Equipment.html">Equipment</a></li>
-                <li><a href="Locations.html">Locations</a></li>
-                <li class="nav-right"><a href="index.html">Main</a></li>
-            </ul>
-        </nav>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">HALO</span>
+                <span class="logo-sub">FANSITE</span>
+            </a>
+
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+                <span class="hamburger"></span>
+            </button>
+
+            <nav id="nav-menu" class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Characters.html" aria-current="page">Characters</a></li>
+                    <li><a href="Equipment.html">Equipment</a></li>
+                    <li><a href="Locations.html">Locations</a></li>
+                </ul>
+            </nav>
+
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="true">
+                <span class="icon">☀️</span>
+            </button>
+        </div>
     </header>
 
-    <main id="main-content">
-        <section class="content-wrapper">
-            <article class="main-content">
-                <h2>Characters</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col">Image</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Callsign</th>
-                                <th scope="col">Species</th>
-                                <th scope="col">External Link</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><img src="john117.png" alt="Master Chief in Spartan armor" loading="lazy"></td>
-                                <td>Master Chief</td>
-                                <td>John-117</td>
-                                <td>Human - Enhanced</td>
-                                <td><a href="https://halo.fandom.com/wiki/John-117" target="_blank" rel="noopener noreferrer">Wiki Link</a></td>
-                            </tr>
-                            <tr>
-                                <td><img src="cortana.png" alt="Cortana holographic form" loading="lazy"></td>
-                                <td>UNSC AI</td>
-                                <td>Cortana</td>
-                                <td>Artificial Intelligence</td>
-                                <td>N/A</td>
-                            </tr>
-                            <tr>
-                                <td><img src="Johnson.png" alt="Sergeant Avery Johnson" loading="lazy"></td>
-                                <td>Avery Johnson</td>
-                                <td>Sergeant</td>
-                                <td>Human</td>
-                                <td>N/A</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </article>
+    <!-- Page Header -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>Characters</h1>
+            <p>The heroes and legends of the Halo universe</p>
+        </div>
+    </section>
 
-            <aside class="sidepanel">
-                <h2>Cortana Says</h2>
-                <p>This is the characters page!</p>
-                <p>Detailed information about the characters of Halo can be found here.</p>
-                <p>You can use the buttons at the top to navigate to other pages.</p>
-                <img src="cortana.png" alt="Cortana, the AI companion" loading="lazy">
-            </aside>
-        </section>
+    <!-- Main Content -->
+    <main id="main-content">
+        <div class="container">
+            <!-- Character Cards -->
+            <section class="characters-section">
+                <div class="characters-grid">
+                    <!-- Master Chief Card -->
+                    <article class="character-card">
+                        <div class="card-image">
+                            <img src="assets/images/john117.png" alt="Master Chief in iconic green Spartan armor" loading="lazy">
+                            <span class="card-badge">Spartan-II</span>
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-title">Master Chief</h2>
+                            <div class="card-meta">
+                                <span class="meta-item">
+                                    <strong>Callsign:</strong> John-117
+                                </span>
+                                <span class="meta-item">
+                                    <strong>Species:</strong> Human (Enhanced)
+                                </span>
+                                <span class="meta-item">
+                                    <strong>Rank:</strong> Master Chief Petty Officer
+                                </span>
+                            </div>
+                            <p class="card-description">
+                                The legendary Spartan-II super soldier and humanity's greatest warrior.
+                                John-117 has single-handedly turned the tide of countless battles against
+                                the Covenant and other threats to humanity.
+                            </p>
+                            <div class="card-actions">
+                                <a href="https://halo.fandom.com/wiki/John-117" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                                    Learn More →
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Cortana Card -->
+                    <article class="character-card">
+                        <div class="card-image">
+                            <img src="assets/images/cortana.png" alt="Cortana's holographic avatar" loading="lazy">
+                            <span class="card-badge">AI</span>
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-title">Cortana</h2>
+                            <div class="card-meta">
+                                <span class="meta-item">
+                                    <strong>Designation:</strong> CTN 0452-9
+                                </span>
+                                <span class="meta-item">
+                                    <strong>Type:</strong> Smart AI
+                                </span>
+                                <span class="meta-item">
+                                    <strong>Created:</strong> November 7, 2549
+                                </span>
+                            </div>
+                            <p class="card-description">
+                                A highly advanced UNSC artificial intelligence, Cortana was created from
+                                a flash clone of Dr. Catherine Halsey's brain. She serves as Master Chief's
+                                closest companion and tactical advisor.
+                            </p>
+                            <div class="card-actions">
+                                <a href="https://halo.fandom.com/wiki/Cortana" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                                    Learn More →
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Sergeant Johnson Card -->
+                    <article class="character-card">
+                        <div class="card-image">
+                            <img src="assets/images/Johnson.png" alt="Sergeant Major Avery Johnson" loading="lazy">
+                            <span class="card-badge">Marine</span>
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-title">Avery Johnson</h2>
+                            <div class="card-meta">
+                                <span class="meta-item">
+                                    <strong>Rank:</strong> Sergeant Major
+                                </span>
+                                <span class="meta-item">
+                                    <strong>Species:</strong> Human
+                                </span>
+                                <span class="meta-item">
+                                    <strong>Branch:</strong> UNSC Marine Corps
+                                </span>
+                            </div>
+                            <p class="card-description">
+                                A veteran of the Insurrection and Human-Covenant War, Sergeant Major Johnson
+                                is known for his unwavering courage, sharp wit, and legendary cigar. He fought
+                                alongside Master Chief in numerous pivotal battles.
+                            </p>
+                            <div class="card-actions">
+                                <a href="https://halo.fandom.com/wiki/Avery_Johnson" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                                    Learn More →
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Cortana Says Section -->
+            <section class="cortana-section">
+                <div class="cortana-card">
+                    <div class="cortana-image">
+                        <img src="assets/images/cortana.png" alt="Cortana AI" loading="lazy">
+                    </div>
+                    <div class="cortana-content">
+                        <h2>Cortana Says</h2>
+                        <blockquote>
+                            "These are the heroes who stand between humanity and extinction. Each one has
+                            sacrificed more than you could imagine. Click on any card to learn more about
+                            their incredible stories."
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <footer>
-        <p>Halo is a registered trademark of Microsoft Corporation.</p>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">HALO</span>
+                    <span class="logo-sub">FANSITE</span>
+                </div>
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <a href="Characters.html">Characters</a>
+                    <a href="Equipment.html">Equipment</a>
+                    <a href="Locations.html">Locations</a>
+                </nav>
+                <p class="footer-legal">
+                    Halo is a registered trademark of Microsoft Corporation.
+                    <br>This is a fan-made site for educational purposes.
+                </p>
+            </div>
+        </div>
     </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

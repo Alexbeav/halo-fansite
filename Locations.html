@@ -1,52 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Discover the iconic locations from the Halo universe including Reach, Earth, and Installation 04.">
-    <title>Halo - Locations</title>
+    <meta name="description" content="Explore the iconic locations of the Halo universe - Reach, Earth, the Pillar of Autumn, and the mysterious Halo rings.">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Halo Locations - Explore the Universe">
+    <meta property="og:description" content="From the fortress world of Reach to the mysterious Halo rings.">
+    <meta property="og:image" content="assets/images/reach.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/cortana.png">
+
+    <title>Halo Fansite - Locations</title>
+
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="page-locations">
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <header>
-        <h1>Welcome to a Halo fansite!</h1>
-        <nav aria-label="Main navigation">
-            <ul>
-                <li><a href="Characters.html">Characters</a></li>
-                <li><a href="Equipment.html">Equipment</a></li>
-                <li><a href="Locations.html" aria-current="page">Locations</a></li>
-                <li class="nav-right"><a href="index.html">Main</a></li>
-            </ul>
-        </nav>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">HALO</span>
+                <span class="logo-sub">FANSITE</span>
+            </a>
+
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+                <span class="hamburger"></span>
+            </button>
+
+            <nav id="nav-menu" class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Characters.html">Characters</a></li>
+                    <li><a href="Equipment.html">Equipment</a></li>
+                    <li><a href="Locations.html" aria-current="page">Locations</a></li>
+                </ul>
+            </nav>
+
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="true">
+                <span class="icon">☀️</span>
+            </button>
+        </div>
     </header>
 
-    <main id="main-content">
-        <section class="content-wrapper">
-            <article class="main-content">
-                <h2>Locations</h2>
-                <p>Some of the locations visited in the Halo games are:</p>
-                <ul class="locations-list">
-                    <li>Reach</li>
-                    <li>Earth</li>
-                    <li>UNSC Pillar of Autumn</li>
-                    <li>Installation 04 (Halo)</li>
-                </ul>
-            </article>
+    <!-- Page Header -->
+    <section class="page-hero page-hero-locations">
+        <div class="page-hero-content">
+            <h1>Locations</h1>
+            <p>The worlds and installations of the Halo universe</p>
+        </div>
+    </section>
 
-            <aside class="sidepanel">
-                <h2>Cortana Says</h2>
-                <p>This is the locations page!</p>
-                <p>Information about the locations of Halo can be found here.</p>
-                <p>You can use the buttons at the top to navigate to other pages.</p>
-                <img src="cortana.png" alt="Cortana, the AI companion" loading="lazy">
-            </aside>
-        </section>
+    <!-- Main Content -->
+    <main id="main-content">
+        <div class="container">
+            <!-- Locations Grid -->
+            <section class="locations-section">
+                <div class="locations-grid">
+                    <!-- Reach Card -->
+                    <article class="location-card location-card-featured">
+                        <div class="card-background" style="background-image: url('assets/images/reach.jpg');"></div>
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-tag">Planet</span>
+                            <h2 class="card-title">Reach</h2>
+                            <p class="card-description">
+                                The UNSC's fortress world and primary military hub. Home to the
+                                Spartan-II program and the site of one of humanity's greatest battles.
+                                Its fall marked a turning point in the Human-Covenant War.
+                            </p>
+                            <div class="card-meta">
+                                <span>Epsilon Eridani System</span>
+                                <span>Population: 703 Million (former)</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Earth Card -->
+                    <article class="location-card">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-tag">Planet</span>
+                            <h2 class="card-title">Earth</h2>
+                            <p class="card-description">
+                                Humanity's homeworld and the heart of the United Nations Space Command.
+                                The Covenant's invasion of Earth was their boldest assault yet.
+                            </p>
+                            <div class="card-meta">
+                                <span>Sol System</span>
+                                <span>UNSC Headquarters</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Pillar of Autumn Card -->
+                    <article class="location-card">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-tag">Starship</span>
+                            <h2 class="card-title">UNSC Pillar of Autumn</h2>
+                            <p class="card-description">
+                                A Halcyon-class light cruiser commanded by Captain Jacob Keyes.
+                                This ship carried Master Chief and Cortana to the first Halo ring.
+                            </p>
+                            <div class="card-meta">
+                                <span>Halcyon-class Cruiser</span>
+                                <span>Captain: Jacob Keyes</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Installation 04 Card -->
+                    <article class="location-card">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-tag">Forerunner</span>
+                            <h2 class="card-title">Installation 04</h2>
+                            <p class="card-description">
+                                The first Halo ring discovered by humanity. A massive Forerunner
+                                superweapon designed to eliminate the Flood threat by destroying
+                                all sentient life in the galaxy.
+                            </p>
+                            <div class="card-meta">
+                                <span>Halo Ring</span>
+                                <span>Diameter: 10,000 km</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Cortana Says Section -->
+            <section class="cortana-section">
+                <div class="cortana-card">
+                    <div class="cortana-image">
+                        <img src="assets/images/cortana.png" alt="Cortana AI" loading="lazy">
+                    </div>
+                    <div class="cortana-content">
+                        <h2>Cortana Says</h2>
+                        <blockquote>
+                            "The universe is vast, and we've only scratched the surface. Each of these
+                            locations holds secrets, battles, and stories that shaped the fate of
+                            humanity. Some hold hope. Others... only nightmares."
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <footer>
-        <p>Halo is a registered trademark of Microsoft Corporation.</p>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">HALO</span>
+                    <span class="logo-sub">FANSITE</span>
+                </div>
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <a href="Characters.html">Characters</a>
+                    <a href="Equipment.html">Equipment</a>
+                    <a href="Locations.html">Locations</a>
+                </nav>
+                <p class="footer-legal">
+                    Halo is a registered trademark of Microsoft Corporation.
+                    <br>This is a fan-made site for educational purposes.
+                </p>
+            </div>
+        </div>
     </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

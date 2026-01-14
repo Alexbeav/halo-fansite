@@ -1,81 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Explore the weapons and equipment used in the Halo universe including the Assault Rifle, Battle Rifle, and Pistol.">
-    <title>Halo - Equipment</title>
+    <meta name="description" content="Explore the legendary weapons and equipment of the UNSC - Assault Rifle, Battle Rifle, Pistol, and more from the Halo universe.">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Halo Equipment - UNSC Arsenal">
+    <meta property="og:description" content="Discover the weapons that defend humanity against the Covenant.">
+    <meta property="og:image" content="assets/images/AR.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/cortana.png">
+
+    <title>Halo Fansite - Equipment</title>
+
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="page-equipment">
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <header>
-        <h1>Welcome to a Halo fansite!</h1>
-        <nav aria-label="Main navigation">
-            <ul>
-                <li><a href="Characters.html">Characters</a></li>
-                <li><a href="Equipment.html" aria-current="page">Equipment</a></li>
-                <li><a href="Locations.html">Locations</a></li>
-                <li class="nav-right"><a href="index.html">Main</a></li>
-            </ul>
-        </nav>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">HALO</span>
+                <span class="logo-sub">FANSITE</span>
+            </a>
+
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+                <span class="hamburger"></span>
+            </button>
+
+            <nav id="nav-menu" class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Characters.html">Characters</a></li>
+                    <li><a href="Equipment.html" aria-current="page">Equipment</a></li>
+                    <li><a href="Locations.html">Locations</a></li>
+                </ul>
+            </nav>
+
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="true">
+                <span class="icon">☀️</span>
+            </button>
+        </div>
     </header>
 
-    <main id="main-content">
-        <section class="content-wrapper">
-            <article class="main-content">
-                <h2>Equipment - Weapons</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col">Image</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Range</th>
-                                <th scope="col">Ammo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><img src="AR.png" alt="MA5B Assault Rifle" loading="lazy"></td>
-                                <td>Assault Rifle</td>
-                                <td>Main Rifle</td>
-                                <td>Medium</td>
-                                <td>7.62mm</td>
-                            </tr>
-                            <tr>
-                                <td><img src="BR.png" alt="BR55 Battle Rifle" loading="lazy"></td>
-                                <td>Battle Rifle</td>
-                                <td>ODST Rifle</td>
-                                <td>Medium - Long</td>
-                                <td>5.56mm</td>
-                            </tr>
-                            <tr>
-                                <td><img src="Pistol.png" alt="M6D Pistol" loading="lazy"></td>
-                                <td>Pistol</td>
-                                <td>Sidearm</td>
-                                <td>Short - Medium</td>
-                                <td>9mm</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </article>
+    <!-- Page Header -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>Equipment</h1>
+            <p>The weapons and gear of the UNSC</p>
+        </div>
+    </section>
 
-            <aside class="sidepanel">
-                <h2>Cortana Says</h2>
-                <p>This is the equipment page!</p>
-                <p>An overview of the equipment used to brave Halo can be found here.</p>
-                <p>You can use the buttons at the top to navigate to other pages.</p>
-                <img src="cortana.png" alt="Cortana, the AI companion" loading="lazy">
-            </aside>
-        </section>
+    <!-- Main Content -->
+    <main id="main-content">
+        <div class="container">
+            <!-- Equipment Cards -->
+            <section class="equipment-section">
+                <h2 class="section-title">UNSC Weapons</h2>
+                <p class="section-subtitle">Standard issue armaments for humanity's defenders</p>
+
+                <div class="equipment-grid">
+                    <!-- Assault Rifle Card -->
+                    <article class="equipment-card">
+                        <div class="card-image">
+                            <img src="assets/images/AR.png" alt="MA5B Individual Combat Weapon System" loading="lazy">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">MA5B Assault Rifle</h3>
+                            <div class="card-specs">
+                                <div class="spec-item">
+                                    <span class="spec-label">Type</span>
+                                    <span class="spec-value">Assault Rifle</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Caliber</span>
+                                    <span class="spec-value">7.62x51mm FMJ</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Magazine</span>
+                                    <span class="spec-value">60 rounds</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Range</span>
+                                    <span class="spec-value">Medium</span>
+                                </div>
+                            </div>
+                            <p class="card-description">
+                                The workhorse of the UNSC Marine Corps. Reliable, accurate, and deadly
+                                in close to medium range combat situations.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Battle Rifle Card -->
+                    <article class="equipment-card">
+                        <div class="card-image">
+                            <img src="assets/images/BR.png" alt="BR55 Heavy Barrel Service Rifle" loading="lazy">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">BR55 Battle Rifle</h3>
+                            <div class="card-specs">
+                                <div class="spec-item">
+                                    <span class="spec-label">Type</span>
+                                    <span class="spec-value">Battle Rifle</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Caliber</span>
+                                    <span class="spec-value">9.5x40mm KURZ</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Magazine</span>
+                                    <span class="spec-value">36 rounds</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Range</span>
+                                    <span class="spec-value">Medium-Long</span>
+                                </div>
+                            </div>
+                            <p class="card-description">
+                                Precision three-round burst rifle favored by ODSTs and Spartans.
+                                Excellent accuracy at range with a 2x optical scope.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Pistol Card -->
+                    <article class="equipment-card">
+                        <div class="card-image">
+                            <img src="assets/images/Pistol.png" alt="M6D Personal Defense Weapon System" loading="lazy">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">M6D Pistol</h3>
+                            <div class="card-specs">
+                                <div class="spec-item">
+                                    <span class="spec-label">Type</span>
+                                    <span class="spec-value">Sidearm</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Caliber</span>
+                                    <span class="spec-value">12.7x40mm SAP-HE</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Magazine</span>
+                                    <span class="spec-value">12 rounds</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Range</span>
+                                    <span class="spec-value">Short-Medium</span>
+                                </div>
+                            </div>
+                            <p class="card-description">
+                                Don't let the name fool you - this semi-automatic magnum packs
+                                enough punch to take down Elite shields with precision shots.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Cortana Says Section -->
+            <section class="cortana-section">
+                <div class="cortana-card">
+                    <div class="cortana-image">
+                        <img src="assets/images/cortana.png" alt="Cortana AI" loading="lazy">
+                    </div>
+                    <div class="cortana-content">
+                        <h2>Cortana Says</h2>
+                        <blockquote>
+                            "These weapons may seem primitive compared to Covenant technology, but in the
+                            hands of a Spartan, they become instruments of legend. Remember: it's not the
+                            weapon that makes the soldier."
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <footer>
-        <p>Halo is a registered trademark of Microsoft Corporation.</p>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">HALO</span>
+                    <span class="logo-sub">FANSITE</span>
+                </div>
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <a href="Characters.html">Characters</a>
+                    <a href="Equipment.html">Equipment</a>
+                    <a href="Locations.html">Locations</a>
+                </nav>
+                <p class="footer-legal">
+                    Halo is a registered trademark of Microsoft Corporation.
+                    <br>This is a fan-made site for educational purposes.
+                </p>
+            </div>
+        </div>
     </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
