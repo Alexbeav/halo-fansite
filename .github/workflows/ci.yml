@@ -1,0 +1,124 @@
+name: CI - Validate
+
+on:
+  # Run on all pull requests
+  pull_request:
+    branches:
+      - main
+      - master
+
+  # Run on push to any branch
+  push:
+    branches:
+      - '**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate HTML
+        uses: anishathalye/proof-html@v2
+        with:
+          directory: .
+          check_html: true
+          check_external_hash: false
+          ignore_urls: |
+            https://halo.fandom.com/*
+        continue-on-error: true
+
+      - name: Check file structure
+        run: |
+          echo "Checking required files exist..."
+
+          # Check HTML files
+          for file in index.html Characters.html Equipment.html Locations.html; do
+            if [ -f "$file" ]; then
+              echo "✓ $file exists"
+            else
+              echo "✗ $file missing"
+              exit 1
+            fi
+          done
+
+          # Check directories
+          for dir in css js assets/images; do
+            if [ -d "$dir" ]; then
+              echo "✓ $dir/ exists"
+            else
+              echo "✗ $dir/ missing"
+              exit 1
+            fi
+          done
+
+          # Check critical files
+          for file in css/style.css js/main.js; do
+            if [ -f "$file" ]; then
+              echo "✓ $file exists"
+            else
+              echo "✗ $file missing"
+              exit 1
+            fi
+          done
+
+          echo ""
+          echo "All checks passed!"
+
+      - name: Check for large files
+        run: |
+          echo "Checking for files larger than 5MB..."
+          large_files=$(find . -type f -size +5M -not -path "./.git/*" 2>/dev/null)
+          if [ -n "$large_files" ]; then
+            echo "Warning: Large files found:"
+            echo "$large_files"
+          else
+            echo "✓ No oversized files found"
+          fi
+
+  docker-build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image (test only)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: halo-fansite:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Test container starts
+        run: |
+          docker run -d --name test-container -p 8080:80 halo-fansite:test
+          sleep 3
+
+          # Test if server responds
+          if curl -s -o /dev/null -w "%{http_code}" http://localhost:8080 | grep -q "200"; then
+            echo "✓ Server responds with 200 OK"
+          else
+            echo "✗ Server did not respond correctly"
+            docker logs test-container
+            exit 1
+          fi
+
+          # Test if index.html is served
+          if curl -s http://localhost:8080 | grep -q "Halo"; then
+            echo "✓ Index page contains expected content"
+          else
+            echo "✗ Index page content check failed"
+            exit 1
+          fi
+
+          docker stop test-container
+          echo ""
+          echo "All container tests passed!"
