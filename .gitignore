@@ -1,0 +1,10 @@
+# Editor config
+.vscode/
+
+# Submission files
+*.docx
+*.zip
+
+# OS files
+.DS_Store
+Thumbs.db

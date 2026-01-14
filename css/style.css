@@ -1,0 +1,157 @@
+h1
+{
+text-align: center;
+border: 1px black solid;
+border-width: 10px;
+background: black;
+position: relative;
+bottom: -22px;
+opacity: 0.8;
+}
+
+/*Navigation*/
+nav
+{
+text-align: center;
+background: black;
+}
+
+.locations
+{
+    list-style-type: none;
+    background-color: black;
+    position: relative;
+    left: 50px;
+    font-size: 24px;
+    width: 150px;
+}
+
+h3
+{
+    position: relative;
+    left: 50px;
+    font-size: 24px;
+    width: 150px;
+}
+
+ol
+{
+    list-style-type: none;
+    background-color: black;
+    position: relative;
+    left: 50px;
+    font-size: 24px;
+    width: 150px;
+}
+
+/*List*/
+ul 
+{ 
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+
+
+/*List Items*/
+li 
+{
+    float: left;
+}
+
+/*List Items with links*/
+li a 
+{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-style: italic;
+}
+
+li a:hover 
+{
+    background-color: #111;
+}
+
+section 
+{
+   background: black;
+   color:steelblue;
+}
+
+#main 
+{
+    width: 1000px;
+    float: left;
+    height: 800px;
+    background-color: black;
+    border-width: 5px;
+    border-style: groove;
+    opacity: 0.85;
+}
+
+#sidepanel 
+{
+    width: 550px;
+    float: right;
+    height: 800px;
+    border-width: 5px;
+    border-style: groove;
+    opacity: 0.85;
+    background-color: black;
+}
+
+h2
+{
+font-weight: bold;
+position: relative;
+font-size: 36px;
+left: 15px;
+}
+
+p 
+{
+   opacity: 1;
+   width: 350px;
+   border: 2px black solid;
+   position: relative;
+   left: 15px;
+   font-size: 24px;
+   color: dodgerblue;
+}
+
+.img1
+{
+position: relative;
+}
+
+.img2
+{
+    position: absolute;
+    float: right;
+    right: 70px;
+    bottom: 115px;
+}
+
+table, th, td 
+{
+width: 700px;
+border: 1px solid white;
+}
+
+th, td
+{
+padding: 5px;
+text-align: center;
+}
+
+table
+{
+position: relative;
+left: 50px;
+}
