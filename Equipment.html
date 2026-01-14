@@ -1,85 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Halo - Equipment</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <style>
-        body
-		{
-            overflow:scroll;
-            background-image: url("halo4.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
-            /*background-position: center center;*/
-            color: white;
-			
-        }
-    </style>
-    <body> 
-		<header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore the weapons and equipment used in the Halo universe including the Assault Rifle, Battle Rifle, and Pistol.">
+    <title>Halo - Equipment</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-equipment">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
         <h1>Welcome to a Halo fansite!</h1>
-        <nav>
+        <nav aria-label="Main navigation">
             <ul>
                 <li><a href="Characters.html">Characters</a></li>
-                <li><a href="Equipment.html">Equipment</a></li>
+                <li><a href="Equipment.html" aria-current="page">Equipment</a></li>
                 <li><a href="Locations.html">Locations</a></li>
-                <li style="float: right"><a href="index.html">Main</a></li>
+                <li class="nav-right"><a href="index.html">Main</a></li>
             </ul>
         </nav>
-		</header>
-		
-		<section>
-			<div id="main">
-				<h2><u>Equipment - Weapons</u></h2>
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Range</th>
-                        <th>Ammo</th>
-                    </tr>
-                    <tr>
-                        <td><img class="img1" src=AR.png alt="AR" height=50%></td>
-					    <td>Assault Rifle</td>
-                        <td>Main Rifle</td>
-                        <td>Medium</td>
-                        <td>7.62mm</td>
-                    </tr>
-                    <tr>
-                        <td><img class="img1" src=BR.png alt="BR" height=50%></td>
-                        <td>Battle Rifle</td>
-                        <td>ODST Rifle</td>
-                        <td>Medium - Long</td>
-                        <td>5.56mm</td>
-                    </tr>
-                    <tr>
-                        <td><img class="img1" src=pistol.png alt="Johnson" height=50%></td>
-                        <td>Pistol</td>
-                        <td>Sidearm</td>
-                        <td>Short - Medium</td>
-                        <td>9mm</td>
-                    </tr>
-                </table>
-			</div>
-            <aside id="sidepanel">
-                <h2><u>Cortana Says</u></h2>
-                    <p>
-                    This is the equipment page!
-                        </br></br>
-                    An overview of the equipment used to brave Halo can be found here.
-                        </br></br>
-                    You can use the buttons at the top to navigate to other pages.
-                        </br></br>
-                    </p>
-                    
-                    </br>
-                    <img class="img2" src=cortana.png alt="Cortana" height="35%"> 
+    </header>
+
+    <main id="main-content">
+        <section class="content-wrapper">
+            <article class="main-content">
+                <h2>Equipment - Weapons</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Range</th>
+                                <th scope="col">Ammo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="AR.png" alt="MA5B Assault Rifle" loading="lazy"></td>
+                                <td>Assault Rifle</td>
+                                <td>Main Rifle</td>
+                                <td>Medium</td>
+                                <td>7.62mm</td>
+                            </tr>
+                            <tr>
+                                <td><img src="BR.png" alt="BR55 Battle Rifle" loading="lazy"></td>
+                                <td>Battle Rifle</td>
+                                <td>ODST Rifle</td>
+                                <td>Medium - Long</td>
+                                <td>5.56mm</td>
+                            </tr>
+                            <tr>
+                                <td><img src="Pistol.png" alt="M6D Pistol" loading="lazy"></td>
+                                <td>Pistol</td>
+                                <td>Sidearm</td>
+                                <td>Short - Medium</td>
+                                <td>9mm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <aside class="sidepanel">
+                <h2>Cortana Says</h2>
+                <p>This is the equipment page!</p>
+                <p>An overview of the equipment used to brave Halo can be found here.</p>
+                <p>You can use the buttons at the top to navigate to other pages.</p>
+                <img src="cortana.png" alt="Cortana, the AI companion" loading="lazy">
             </aside>
-		</section>
-    </body>
-    <!--<audio autoplay loop src="reach_main.mp3"></audio>-->
-</html>>
+        </section>
+    </main>
+
+    <footer>
+        <p>Halo is a registered trademark of Microsoft Corporation.</p>
+    </footer>
+</body>
+</html>

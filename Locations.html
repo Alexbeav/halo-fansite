@@ -1,63 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Halo - Characters</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <style>
-        body
-		{
-            overflow:scroll;
-            background-image: url("reach.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
-            /*background-position: center center;*/
-            color: white;
-			
-        }
-    </style>
-    <body> 
-		<header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Discover the iconic locations from the Halo universe including Reach, Earth, and Installation 04.">
+    <title>Halo - Locations</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-locations">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
         <h1>Welcome to a Halo fansite!</h1>
-        <nav>
+        <nav aria-label="Main navigation">
             <ul>
                 <li><a href="Characters.html">Characters</a></li>
                 <li><a href="Equipment.html">Equipment</a></li>
-                <li><a href="Locations.html">Locations</a></li>
-                <li style="float: right"><a href="index.html">Main</a></li>
+                <li><a href="Locations.html" aria-current="page">Locations</a></li>
+                <li class="nav-right"><a href="index.html">Main</a></li>
             </ul>
         </nav>
-		</header>
-		
-		<section>
-			<div id="main">
-				<h2><u>Locations</u></h2>
+    </header>
+
+    <main id="main-content">
+        <section class="content-wrapper">
+            <article class="main-content">
+                <h2>Locations</h2>
                 <p>Some of the locations visited in the Halo games are:</p>
-                <ul class="locations">
-                    <li>Reach</li></br>
-                    <li>Earth</li></br>
-                    <li>UNSC Pillar of Autumn</li></br>
-                    <li>Installation 04 (Halo)</li></br>
+                <ul class="locations-list">
+                    <li>Reach</li>
+                    <li>Earth</li>
+                    <li>UNSC Pillar of Autumn</li>
+                    <li>Installation 04 (Halo)</li>
                 </ul>
-                
-			</div>
-            <aside id="sidepanel">
-                <h2><u>Cortana Says</u></h2>
-                    <p>
-                    This is the locations page!
-                        </br></br>
-                    Information about the locations of Halo can be found here.
-                        </br></br>
-                    You can use the buttons at the top to navigate to other pages.
-                        </br></br>
-                    </p>
-                    
-                    </br>
-                    <img class="img2" src=cortana.png alt="Cortana" height="35%"> 
+            </article>
+
+            <aside class="sidepanel">
+                <h2>Cortana Says</h2>
+                <p>This is the locations page!</p>
+                <p>Information about the locations of Halo can be found here.</p>
+                <p>You can use the buttons at the top to navigate to other pages.</p>
+                <img src="cortana.png" alt="Cortana, the AI companion" loading="lazy">
             </aside>
-		</section>
-    </body>
-    <!--<audio autoplay loop src="reach_main.mp3"></audio>-->
-</html>>
+        </section>
+    </main>
+
+    <footer>
+        <p>Halo is a registered trademark of Microsoft Corporation.</p>
+    </footer>
+</body>
+</html>

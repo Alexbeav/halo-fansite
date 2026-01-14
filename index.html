@@ -1,62 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Halo - Main</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <style>
-        body
-		{
-            overflow:scroll;
-            background-image: url("halo4.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
-            /*background-position: center center;*/
-            color: white;
-			
-        }
-    </style>
-    <body> 
-		<header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A fan site dedicated to the Halo video game series featuring characters, equipment, and locations.">
+    <title>Halo - Main</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-home">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
         <h1>Welcome to a Halo fansite!</h1>
-        <nav>
+        <nav aria-label="Main navigation">
             <ul>
                 <li><a href="Characters.html">Characters</a></li>
                 <li><a href="Equipment.html">Equipment</a></li>
                 <li><a href="Locations.html">Locations</a></li>
-                <li style="float: right"><a href="index.html">Main</a></li>
+                <li class="nav-right"><a href="index.html" aria-current="page">Main</a></li>
             </ul>
         </nav>
-		</header>
-		
-		<section>
-			<div id="main">
-				<h2>Introductions</h2>
-					<p>Welcome to the UNSC !</p>
-                    <h3>List of Halo Games</h3>
-                    <ol>
-                        <li>Halo 1 (2001)</li></br>
-                        <li>Halo 2 (2004)</li></br>
-                        <li>Halo 3 (2007)</li></br>
-                        <li>Halo - Reach (2012)</li></br>
-                        <li>Halo 4 (2013)</li></br>
-                    </ol>
-			</div>
-            <aside id="sidepanel">
+    </header>
+
+    <main id="main-content">
+        <section class="content-wrapper">
+            <article class="main-content">
+                <h2>Introductions</h2>
+                <p>Welcome to the UNSC!</p>
+                <h3>List of Halo Games</h3>
+                <ol class="game-list">
+                    <li>Halo: Combat Evolved (2001)</li>
+                    <li>Halo 2 (2004)</li>
+                    <li>Halo 3 (2007)</li>
+                    <li>Halo: Reach (2010)</li>
+                    <li>Halo 4 (2012)</li>
+                </ol>
+            </article>
+
+            <aside class="sidepanel">
                 <h2>Cortana Says</h2>
-                    <p>
-                    This is the main landing page!
-                        </br></br>
-                    You can use the buttons at the top to navigate to other pages.
-                        </br></br>
-                    </p>
-                    
-                    </br>
-                    <img class="img" src=cortana.png alt="Cortana"> 
+                <p>This is the main landing page!</p>
+                <p>You can use the buttons at the top to navigate to other pages.</p>
+                <img src="cortana.png" alt="Cortana, the AI companion" loading="lazy">
             </aside>
-		</section>
-    </body>
-    <!--<audio autoplay loop src="reach_main.mp3"></audio>-->
-</html>>
+        </section>
+    </main>
+
+    <footer>
+        <p>Halo is a registered trademark of Microsoft Corporation.</p>
+    </footer>
+</body>
+</html>
