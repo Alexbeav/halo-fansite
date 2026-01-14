@@ -12,8 +12,10 @@ This document provides an in-depth look at the web development concepts, techniq
 6. [Performance Optimization](#6-performance-optimization)
 7. [Project Organization](#7-project-organization)
 8. [Version Control with Git](#8-version-control-with-git)
-9. [Common Mistakes to Avoid](#9-common-mistakes-to-avoid)
-10. [Further Learning Resources](#10-further-learning-resources)
+9. [Docker Containerization](#9-docker-containerization)
+10. [CI/CD with GitHub Actions](#10-cicd-with-github-actions)
+11. [Common Mistakes to Avoid](#11-common-mistakes-to-avoid)
+12. [Further Learning Resources](#12-further-learning-resources)
 
 ---
 
@@ -1098,9 +1100,557 @@ Thumbs.db
 
 ---
 
-## 9. Common Mistakes to Avoid
+## 9. Docker Containerization
 
-### 9.1 HTML Mistakes
+Docker allows you to package your application with all its dependencies into a standardized unit called a container. This ensures your application runs the same way everywhere.
+
+### 9.1 What is Docker?
+
+Docker solves the "it works on my machine" problem by creating isolated environments:
+
+```
+Traditional Deployment:
+[Your Code] → [Server with different OS/configs] → Problems!
+
+Docker Deployment:
+[Your Code + Dependencies + Config] → [Any Server with Docker] → Works!
+```
+
+**Key Concepts:**
+- **Image** - A blueprint/template for containers (like a class)
+- **Container** - A running instance of an image (like an object)
+- **Dockerfile** - Instructions to build an image
+- **Registry** - Storage for images (Docker Hub, GHCR)
+
+### 9.2 Dockerfile Basics
+
+A Dockerfile contains instructions to build your image:
+
+```dockerfile
+# Start from a base image
+FROM nginx:alpine
+
+# Copy configuration files
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy application files
+COPY assets/ /usr/share/nginx/html/assets/
+COPY css/ /usr/share/nginx/html/css/
+COPY js/ /usr/share/nginx/html/js/
+COPY *.html /usr/share/nginx/html/
+
+# Set permissions
+RUN chmod -R 755 /usr/share/nginx/html
+
+# Document the port the container listens on
+EXPOSE 80
+
+# Command to run when container starts
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+**Common Instructions:**
+
+| Instruction | Purpose | Example |
+|-------------|---------|---------|
+| `FROM` | Base image to build upon | `FROM node:18-alpine` |
+| `COPY` | Copy files from host to image | `COPY . /app` |
+| `RUN` | Execute commands during build | `RUN npm install` |
+| `WORKDIR` | Set working directory | `WORKDIR /app` |
+| `EXPOSE` | Document which ports to expose | `EXPOSE 3000` |
+| `CMD` | Default command when container runs | `CMD ["npm", "start"]` |
+| `ENV` | Set environment variables | `ENV NODE_ENV=production` |
+
+### 9.3 Building and Running Containers
+
+```bash
+# Build an image from Dockerfile
+docker build -t my-app:latest .
+
+# List images
+docker images
+
+# Run a container
+docker run -d -p 8080:80 --name my-container my-app:latest
+#          │  │         │                     │
+#          │  │         │                     └── Image to use
+#          │  │         └── Container name
+#          │  └── Port mapping (host:container)
+#          └── Detached mode (run in background)
+
+# List running containers
+docker ps
+
+# View container logs
+docker logs my-container
+
+# Stop a container
+docker stop my-container
+
+# Remove a container
+docker rm my-container
+
+# Remove an image
+docker rmi my-app:latest
+```
+
+### 9.4 Docker Compose
+
+Docker Compose simplifies multi-container applications with a YAML file:
+
+```yaml
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: my-web-app
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./logs:/var/log/nginx
+
+  database:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
+```
+
+**Docker Compose Commands:**
+
+```bash
+# Start services (build if needed)
+docker-compose up -d
+
+# Stop services
+docker-compose down
+
+# View logs
+docker-compose logs -f
+
+# Rebuild and restart
+docker-compose up -d --build
+
+# Scale services
+docker-compose up -d --scale web=3
+```
+
+### 9.5 .dockerignore File
+
+Like `.gitignore`, this excludes files from the build context:
+
+```dockerignore
+# Version control
+.git
+.gitignore
+
+# Documentation
+*.md
+
+# Development files
+.vscode
+.idea
+node_modules
+
+# Docker files (don't copy into image)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Secrets and environment
+.env
+*.pem
+```
+
+**Why use .dockerignore?**
+- Speeds up builds (less data to send)
+- Reduces image size
+- Prevents sensitive files from being included
+
+### 9.6 Best Practices
+
+**1. Use Small Base Images:**
+```dockerfile
+# Good - Alpine is ~5MB
+FROM nginx:alpine
+
+# Avoid - Full Ubuntu is ~70MB+
+FROM ubuntu:latest
+```
+
+**2. Layer Caching - Order Matters:**
+```dockerfile
+# Good - dependencies change less often than code
+COPY package.json .
+RUN npm install
+COPY . .
+
+# Bad - cache invalidated on any file change
+COPY . .
+RUN npm install
+```
+
+**3. Multi-Stage Builds (for compiled apps):**
+```dockerfile
+# Build stage
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Production stage - only runtime needed
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+```
+
+**4. Don't Run as Root:**
+```dockerfile
+RUN adduser -D appuser
+USER appuser
+```
+
+---
+
+## 10. CI/CD with GitHub Actions
+
+CI/CD (Continuous Integration/Continuous Deployment) automates testing and deployment of your code.
+
+### 10.1 What is CI/CD?
+
+**Continuous Integration (CI):**
+- Automatically test code when pushed
+- Catch bugs early
+- Ensure code quality
+
+**Continuous Deployment (CD):**
+- Automatically deploy tested code
+- Reduce manual deployment errors
+- Ship features faster
+
+```
+Developer pushes code
+        ↓
+CI: Run tests, lint, build
+        ↓
+    Tests pass?
+    ↓       ↓
+   No      Yes
+    ↓       ↓
+ Fix it   CD: Deploy to production
+```
+
+### 10.2 GitHub Actions Basics
+
+Workflows are defined in `.github/workflows/*.yml`:
+
+```yaml
+name: CI Pipeline
+
+# When to run
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main]
+
+# Jobs to execute
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+```
+
+### 10.3 Key Concepts
+
+**Triggers (`on`):**
+```yaml
+on:
+  # Push to specific branches
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'        # Only when src changes
+
+  # Pull requests
+  pull_request:
+    branches: [main]
+
+  # Scheduled (cron)
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight
+
+  # Manual trigger
+  workflow_dispatch:
+
+  # On release
+  release:
+    types: [published]
+```
+
+**Jobs and Steps:**
+```yaml
+jobs:
+  test:
+    runs-on: ubuntu-latest    # Runner OS
+    steps:
+      - name: Step description
+        uses: action/name@v1   # Use pre-built action
+        with:
+          parameter: value
+
+      - name: Run command
+        run: npm test          # Run shell command
+
+  deploy:
+    needs: test               # Wait for test job
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying..."
+```
+
+**Environment Variables and Secrets:**
+```yaml
+env:
+  NODE_ENV: production
+
+jobs:
+  deploy:
+    steps:
+      - name: Deploy
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: ./deploy.sh
+```
+
+### 10.4 Common Actions
+
+**Checkout Code:**
+```yaml
+- uses: actions/checkout@v4
+```
+
+**Setup Languages:**
+```yaml
+- uses: actions/setup-node@v4
+  with:
+    node-version: '20'
+    cache: 'npm'
+
+- uses: actions/setup-python@v5
+  with:
+    python-version: '3.11'
+```
+
+**Caching:**
+```yaml
+- uses: actions/cache@v4
+  with:
+    path: ~/.npm
+    key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+```
+
+**Upload Artifacts:**
+```yaml
+- uses: actions/upload-artifact@v4
+  with:
+    name: build-output
+    path: dist/
+```
+
+### 10.5 Deploying to GitHub Pages
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Build
+        run: |
+          mkdir -p _site
+          cp -r css js assets *.html _site/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+### 10.6 Building Docker Images
+
+```yaml
+name: Build Docker Image
+
+on:
+  push:
+    branches: [main]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha
+            type=raw,value=latest
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+```
+
+### 10.7 Workflow Best Practices
+
+**1. Use Specific Action Versions:**
+```yaml
+# Good - pinned to major version
+uses: actions/checkout@v4
+
+# Risky - always latest
+uses: actions/checkout@main
+```
+
+**2. Fail Fast:**
+```yaml
+jobs:
+  test:
+    strategy:
+      fail-fast: true
+      matrix:
+        node: [18, 20, 22]
+```
+
+**3. Concurrency Control:**
+```yaml
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+```
+
+**4. Reusable Workflows:**
+```yaml
+# .github/workflows/reusable-test.yml
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        required: true
+        type: string
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+      - run: npm test
+```
+
+```yaml
+# Usage in another workflow
+jobs:
+  call-tests:
+    uses: ./.github/workflows/reusable-test.yml
+    with:
+      node-version: '20'
+```
+
+**5. Status Badges:**
+Add badges to your README to show workflow status:
+```markdown
+[![CI](https://github.com/USER/REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/USER/REPO/actions/workflows/ci.yml)
+```
+
+---
+
+## 11. Common Mistakes to Avoid
+
+### 11.1 HTML Mistakes
 
 ```html
 <!-- Missing alt text -->
@@ -1121,7 +1671,7 @@ Thumbs.db
 <a href="/about">Learn more about us</a>  <!-- Good -->
 ```
 
-### 9.2 CSS Mistakes
+### 11.2 CSS Mistakes
 
 ```css
 /* Using IDs for styling (too specific) */
@@ -1143,7 +1693,7 @@ margin-left: 10px;  /* Bad */
 margin: 10px;  /* Good */
 ```
 
-### 9.3 JavaScript Mistakes
+### 11.3 JavaScript Mistakes
 
 ```javascript
 // Using var instead of let/const
@@ -1166,7 +1716,7 @@ while (condition) { }  // Bad - freezes the page
 
 ---
 
-## 10. Further Learning Resources
+## 12. Further Learning Resources
 
 ### Documentation
 - [MDN Web Docs](https://developer.mozilla.org/) - Comprehensive web documentation
@@ -1193,11 +1743,23 @@ while (condition) { }  // Bad - freezes the page
 - [A11y Project](https://www.a11yproject.com/) - Accessibility patterns
 - [WAVE Tool](https://wave.webaim.org/) - Accessibility evaluation
 
+### Docker & Containers
+- [Docker Documentation](https://docs.docker.com/) - Official Docker docs
+- [Docker Hub](https://hub.docker.com/) - Container image registry
+- [Play with Docker](https://labs.play-with-docker.com/) - Interactive Docker playground
+- [Docker Curriculum](https://docker-curriculum.com/) - Beginner-friendly tutorial
+
+### CI/CD & DevOps
+- [GitHub Actions Docs](https://docs.github.com/en/actions) - Official GitHub Actions documentation
+- [GitHub Actions Marketplace](https://github.com/marketplace?type=actions) - Pre-built actions
+- [DevOps Roadmap](https://roadmap.sh/devops) - Learning path for DevOps
+- [The Twelve-Factor App](https://12factor.net/) - Best practices for modern apps
+
 ---
 
 ## Conclusion
 
-Web development is a constantly evolving field. The techniques covered in this project represent modern best practices as of 2024-2025, but always stay curious and keep learning. The fundamentals—semantic HTML, clean CSS, accessible interfaces, and performant code—will serve you well regardless of what frameworks or tools become popular.
+Web development is a constantly evolving field. The techniques covered in this project represent modern best practices as of 2024-2025, but always stay curious and keep learning. The fundamentals—semantic HTML, clean CSS, accessible interfaces, performant code, containerization, and automated deployment—will serve you well regardless of what frameworks or tools become popular.
 
 Remember:
 - **Write for humans first** - Clean, readable code is maintainable code
@@ -1205,5 +1767,7 @@ Remember:
 - **Test on real devices** - Emulators are helpful but not perfect
 - **Accessibility is not optional** - It's part of good web development
 - **Performance matters** - Users won't wait for slow sites
+- **Automate everything** - CI/CD reduces errors and speeds up delivery
+- **Containerize for consistency** - Docker ensures your app runs the same everywhere
 
 Happy coding!

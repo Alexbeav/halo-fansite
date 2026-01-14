@@ -1,5 +1,9 @@
 # Halo Fansite
 
+[![CI - Validate](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml)
+[![Deploy to GitHub Pages](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/deploy-pages.yml)
+[![Build and Push Docker Image](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/docker-build.yml/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/docker-build.yml)
+
 A modern, responsive fan website dedicated to the Halo video game series. This project demonstrates contemporary web development best practices, evolving from a basic university assignment into a fully-featured static website.
 
 ## Table of Contents
@@ -8,6 +12,8 @@ A modern, responsive fan website dedicated to the Halo video game series. This p
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
+- [Docker](#docker)
+- [CI/CD Pipeline](#cicd-pipeline)
 - [Pages](#pages)
 - [Technologies Used](#technologies-used)
 - [Browser Support](#browser-support)
@@ -50,6 +56,11 @@ The site features information about the Halo universe, including:
 
 ```
 website/
+├── .github/
+│   └── workflows/
+│       ├── ci.yml              # Validation and testing workflow
+│       ├── deploy-pages.yml    # GitHub Pages deployment
+│       └── docker-build.yml    # Docker image build and push
 ├── assets/
 │   └── images/
 │       ├── AR.png              # Assault Rifle image
@@ -67,6 +78,10 @@ website/
 ├── Characters.html             # Characters page
 ├── Equipment.html              # Equipment/Weapons page
 ├── Locations.html              # Locations page
+├── Dockerfile                  # Docker container configuration
+├── docker-compose.yml          # Docker Compose configuration
+├── nginx.conf                  # Nginx web server configuration
+├── .dockerignore               # Docker build exclusions
 ├── README.md                   # This file
 ├── EDUCATION.md                # Educational documentation
 └── .gitignore                  # Git ignore rules
@@ -101,6 +116,79 @@ website/
      ```
 
 3. **Navigate to** `http://localhost:8000` (if using a local server)
+
+## Docker
+
+The project includes Docker configuration for containerized deployment using Nginx.
+
+### Running with Docker
+
+```bash
+# Build and run with Docker Compose (recommended)
+docker-compose up -d
+
+# Or build and run manually
+docker build -t halo-fansite .
+docker run -d -p 8080:80 halo-fansite
+```
+
+The site will be available at `http://localhost:8080`
+
+### Docker Configuration Files
+
+| File | Purpose |
+|------|---------|
+| `Dockerfile` | Multi-stage build using nginx:alpine base image |
+| `docker-compose.yml` | Service orchestration with restart policies |
+| `nginx.conf` | Web server with gzip compression, caching, and security headers |
+| `.dockerignore` | Excludes unnecessary files from Docker build context |
+
+### Production Features
+
+The Nginx configuration includes:
+- **Gzip Compression** - Reduces transfer size for text-based assets
+- **Browser Caching** - Long cache headers for static assets
+- **Security Headers** - X-Frame-Options, X-Content-Type-Options, X-XSS-Protection
+- **SPA Support** - Fallback routing for single-page applications
+
+## CI/CD Pipeline
+
+The project uses GitHub Actions for continuous integration and deployment.
+
+### Workflows
+
+#### 1. CI - Validate (`ci.yml`)
+Runs on every push and pull request:
+- HTML validation using `proof-html`
+- File structure verification (checks required files exist)
+- Large file detection (warns about files > 5MB)
+- Docker build test (ensures container builds and starts correctly)
+
+#### 2. Deploy to GitHub Pages (`deploy-pages.yml`)
+Automatically deploys to GitHub Pages on push to main/master:
+- Packages HTML, CSS, JS, and assets
+- Uploads to GitHub Pages artifact
+- Deploys with zero-downtime
+
+#### 3. Build and Push Docker Image (`docker-build.yml`)
+Builds and pushes to GitHub Container Registry (GHCR):
+- Triggers on changes to Docker-related or web content files
+- Tags images with branch name, SHA, and semantic versions
+- Generates build provenance attestation for supply chain security
+
+### Setting Up CI/CD
+
+1. **Enable GitHub Pages** in repository Settings → Pages → Source: GitHub Actions
+2. **Container Registry** is automatically available via `ghcr.io`
+3. **Workflow badges** (at top of README) will update automatically once workflows run
+
+### Pulling the Docker Image
+
+Once published, pull the image from GHCR:
+```bash
+docker pull ghcr.io/YOUR_USERNAME/YOUR_REPO:latest
+docker run -d -p 8080:80 ghcr.io/YOUR_USERNAME/YOUR_REPO:latest
+```
 
 ## Pages
 
@@ -192,7 +280,14 @@ This project follows WCAG 2.1 guidelines:
 
 ## Version History
 
-### v3.0 - Full Modernization (Current)
+### v4.0 - DevOps & Deployment (Current)
+- Docker containerization with Nginx
+- GitHub Actions CI/CD pipeline
+- Automated deployment to GitHub Pages
+- Container image publishing to GHCR
+- Comprehensive documentation
+
+### v3.0 - Full Modernization
 - Complete visual redesign with card-based layouts
 - Dark/light theme support
 - JavaScript interactivity (hamburger menu, lightbox, animations)
