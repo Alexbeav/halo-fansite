@@ -39,6 +39,7 @@ jobs:
           cp -r assets _site/
           cp -r css _site/
           cp -r js _site/
+          cp -r original _site/
           cp *.html _site/
 
       - name: Upload artifact
